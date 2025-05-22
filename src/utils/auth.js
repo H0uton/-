@@ -44,3 +44,8 @@ export function getCurrentUser() {
 export function getAllUsers() {
   return JSON.parse(localStorage.getItem('users')) || [];
 }
+
+export function isAdmin(user) {
+  // Замените email на свой
+  return user && user.email === 'admin@example.com';
+}
