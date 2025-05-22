@@ -1,22 +1,27 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { registerUser } from '../utils/auth';
 import './RegisterPage.css';
 
 function RegisterPage() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [msg, setMsg] = useState('');
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    const result = registerUser({ email, password });
-
-    if (result.success) {
+    setMsg('');
+    const res = await fetch('http://localhost:4000/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+    if (res.ok) {
+      setMsg('Регистрация успешна!');
       navigate('/login');
     } else {
-      setMessage(result.message);
+      setMsg('Ошибка: ' + (await res.json()).error);
     }
   };
 
@@ -25,12 +30,12 @@ function RegisterPage() {
       <h2>Зарегистрируйся!</h2>
       <form className="register-form" onSubmit={handleRegister}>
         <input
-          type="email"
-          placeholder="Email"
+          type="text"
+          placeholder="Логин"
           required
-          value={email}
+          value={username}
           maxLength={100}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type="password"
@@ -42,7 +47,7 @@ function RegisterPage() {
         />
         <button className="start-button" type="submit">Зарегистрироваться</button>
       </form>
-      {message && <p className="register-message">{message}</p>}
+      {msg && <p className="register-message">{msg}</p>}
       <p className="register-link">
         Уже есть аккаунт? <Link to="/login">войти в аккаунт</Link>
       </p>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { loginUser } from '../utils/auth';
 import './LoginPage.css';
@@ -11,11 +11,12 @@ function LoginPage() {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setMessage('');
     let result;
     if (loginType === 'email') {
-      result = loginUser(email, password);
+      result = await loginUser(email, password);
     } else {
       // Поиск пользователя по nickname
       const users = JSON.parse(localStorage.getItem('users')) || [];
@@ -29,6 +30,7 @@ function LoginPage() {
     }
 
     if (result.success) {
+      setMessage('Вход выполнен!');
       navigate('/profile');
     } else {
       setMessage(result.message);
