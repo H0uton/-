@@ -1,0 +1,125 @@
+/* Основной стиль для шапки */
+.header {
+  background: linear-gradient(90deg, #d6eeb3 100%);
+  color: #1a5c3e;
+  padding: 22px 0 18px 0;
+  box-shadow: 0 4px 24px rgba(79, 209, 197, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  border-radius: 0 0 22px 22px;
+  margin-bottom: 18px;
+}
+
+/* Логотип */
+.header-logo {
+  font-size: 2.1rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #1a5c3e;
+  text-shadow: 0 2px 8px #e6fffa;
+  margin-left: 32px;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+}
+
+/* Навигация */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px; /* равномерный отступ между всеми элементами */
+}
+
+.header-nav a {
+  color: #1a5c3e;
+  text-decoration: none;
+  font-size: 1.13rem;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 8px;
+  transition: background 0.18s, color 0.18s;
+  border-bottom: 2px solid transparent;
+  letter-spacing: 0.5px;
+}
+
+.header-nav a:hover,
+.header-nav a.active {
+  background: #e6fffa;
+  color: #4fd1c5;
+  border-bottom: 2px solid #4fd1c5;
+}
+
+/* Центрирование навигации */
+.header-nav-center {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  justify-content: center;
+  width: 100%;
+}
+
+.header-link-main {
+  margin-right: 12px;
+}
+
+.header-link-profile {
+  margin-right: 24px;
+}
+
+/* Кнопка профиля */
+.header-profile-btn {
+  background: linear-gradient(90deg, #4fd1c5 0%, #1a5c3e 100%);
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  padding: 10px 28px;
+  font-size: 1.08rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(79, 209, 197, 0.10);
+  margin-left: 24px;
+  transition: background 0.18s, color 0.18s, transform 0.15s;
+  letter-spacing: 0.5px;
+}
+
+.header-profile-btn:hover,
+.header-profile-btn:focus {
+  background: linear-gradient(90deg, #1a5c3e 0%, #4fd1c5 100%);
+  color: #fff;
+  transform: translateY(-2px) scale(1.06);
+  outline: none;
+}
+
+/* Анимация */
+.header-anim {
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+
+.header-anim:hover,
+.header-anim:focus {
+  transform: scale(1.07);
+  outline: none;
+}
+
+/* Адаптивность */
+@media (max-width: 900px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 0 10px 0;
+  }
+  .header-logo {
+    margin-left: 0;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .header-nav-center {
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .header-profile-btn {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
