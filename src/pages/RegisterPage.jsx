@@ -9,19 +9,16 @@ function RegisterPage() {
   const [msg, setMsg] = useState('');
   const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
     setMsg('');
-    const res = await fetch('http://localhost:4000/api/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    });
-    if (res.ok) {
+    // Используем registerUser из utils/auth.js
+    const result = registerUser({ email: username, password });
+    if (result.success) {
       setMsg('Регистрация успешна!');
-      navigate('/login');
+      setTimeout(() => navigate('/login'), 1000);
     } else {
-      setMsg('Ошибка: ' + (await res.json()).error);
+      setMsg('Ошибка: ' + result.message);
     }
   };
 
