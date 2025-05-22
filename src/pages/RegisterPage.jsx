@@ -60,6 +60,22 @@ function RegisterPage() {
           value={password}
           maxLength={100}
           onChange={(e) => setPassword(e.target.value)}
+          style={{
+            padding: '13px 14px',
+            border: '1.5px solid #cbe7b6',
+            borderRadius: '8px',
+            fontSize: '1.08rem',
+            background: '#f3eedf',
+            color: '#0d341c',
+            outline: 'none',
+            transition: 'border 0.2s',
+            width: '100%',
+            marginBottom: '20px',
+            textAlign: 'center',
+            boxSizing: 'border-box'
+          }}
+          onFocus={e => e.target.style.background = '#f6fbe9'}
+          onBlur={e => e.target.style.background = '#f3eedf'}
         />
         <button className="start-button" type="submit">Зарегистрироваться</button>
       </form>
