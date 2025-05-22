@@ -2,9 +2,10 @@
 
 export function registerUser(userData) {
   const users = JSON.parse(localStorage.getItem('users')) || [];
-  // Сохраняем email, password и nickname (если есть)
   const userExists = users.some(
-    user => user.email === userData.email || (userData.nickname && user.nickname === userData.nickname)
+    user =>
+      user.email === userData.email ||
+      (userData.nickname && user.nickname === userData.nickname)
   );
 
   if (userExists) {
@@ -14,7 +15,8 @@ export function registerUser(userData) {
   users.push({
     email: userData.email,
     password: userData.password,
-    nickname: userData.nickname || ''
+    nickname: userData.nickname || '',
+    avatar: userData.avatar || '' // сохраняем base64 строку, если есть
   });
   localStorage.setItem('users', JSON.stringify(users));
   return { success: true };
