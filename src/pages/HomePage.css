@@ -1,3 +1,4 @@
+
 /* --- Новый современный стиль для сайта --- */
 
 body, .homepage {
@@ -713,10 +714,88 @@ footer a:hover {
   }
 }
 
-.centered-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+/* --- Адаптация для мобильных устройств --- */
+@media (max-width: 600px) {
+  .homepage {
+    padding: 0;
+    min-height: 100vh;
+  }
+  .hero-section {
+    flex-direction: column;
+    padding: 24px 4px 18px 4px;
+    margin: 16px 0 16px 0;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(44, 62, 80, 0.10);
+    background-size: cover;
+  }
+  .hero-text-content h1 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  .hero-text-content p {
+    font-size: 1rem;
+    margin-bottom: 18px;
+  }
+  .button-wrapper {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .start-button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px 0;
+    border-radius: 12px;
+  }
+  .about-section {
+    padding: 18px 8px;
+    margin: 16px 0 16px 0;
+    border-radius: 12px;
+  }
+  .about-section h1, .about-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  .about-section p, .about-section ul, .about-section li {
+    font-size: 0.98rem;
+  }
+  .grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .card {
+    padding: 14px 8px;
+    border-radius: 10px;
+    font-size: 0.98rem;
+  }
+  .reviews-section, .reviews-sectionss, .statistics-section, .contact-section {
+    padding: 14px 4px;
+    margin: 12px 0;
+    border-radius: 10px;
+  }
+  .review {
+    font-size: 0.98rem;
+    padding: 10px 0;
+  }
+  .contact-form input, .contact-form textarea {
+    width: 100%;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    padding: 10px 8px;
+    border-radius: 8px;
+  }
+  .contact-form button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px 0;
+    border-radius: 10px;
+  }
+  footer p, footer a {
+    font-size: 0.95rem;
+    word-break: break-all;
+  }
+  .centered-section {
+    padding: 0 2px;
+  }
 }
