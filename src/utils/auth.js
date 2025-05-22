@@ -2,13 +2,20 @@
 
 export function registerUser(userData) {
   const users = JSON.parse(localStorage.getItem('users')) || [];
-  const userExists = users.some(user => user.email === userData.email);
+  // Сохраняем email, password и nickname (если есть)
+  const userExists = users.some(
+    user => user.email === userData.email || (userData.nickname && user.nickname === userData.nickname)
+  );
 
   if (userExists) {
     return { success: false, message: 'Пользователь уже существует' };
   }
 
-  users.push(userData);
+  users.push({
+    email: userData.email,
+    password: userData.password,
+    nickname: userData.nickname || ''
+  });
   localStorage.setItem('users', JSON.stringify(users));
   return { success: true };
 }
@@ -31,4 +38,9 @@ export function logoutUser() {
 
 export function getCurrentUser() {
   return JSON.parse(localStorage.getItem('currentUser'));
+}
+
+// Получить всех пользователей (логины и пароли)
+export function getAllUsers() {
+  return JSON.parse(localStorage.getItem('users')) || [];
 }
