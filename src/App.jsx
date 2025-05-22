@@ -13,6 +13,7 @@ import PlanPage from './pages/PlanPage';
 import FamilyBudgetPage from './pages/FamilyBudgetPage';
 import BudgetTemplatesPage from './pages/BudgetTemplatesPage';
 import ChecklistPage from './pages/ChecklistPage';
+import UsersListPage from './pages/UsersListPage';
 import PrivateRoute from './components/PrivateRoute';
 import Header from './components/Header';
 
@@ -55,6 +56,7 @@ function AppLayout() {
         <Route path="/family-budget" element={<FamilyBudgetPage />} />
         <Route path="/budget-templates" element={<BudgetTemplatesPage />} />
         <Route path="/checklist" element={<ChecklistPage />} />
+        <Route path="/users" element={<UsersListPage />} />
 
         {/* fallback на регистрацию, если путь не найден */}
         <Route path="*" element={<RegisterPage />} />
