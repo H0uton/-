@@ -1,0 +1,92 @@
+.register-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 36px 32px 28px 32px;
+  background: #fffceb;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(31, 114, 43, 0.09);
+  text-align: center;
+}
+
+.register-container h2 {
+  color: #2d8c15;
+  margin-bottom: 28px;
+  font-size: 2rem;
+  letter-spacing: 0.5px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 12px;
+}
+
+.register-form input[type="email"],
+.register-form input[type="password"] {
+  padding: 13px 14px;
+  border: 1.5px solid #cbe7b6;
+  border-radius: 8px;
+  font-size: 1.08rem;
+  background: #f3eedf;
+  color: #0d341c;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.register-form input:focus {
+  border-color: #2d8c15;
+  background: #f6fbe9;
+}
+
+.start-button,
+button,
+.register-form button,
+.register-btn,
+.login-btn,
+.login-type-btn {
+  background: var(--accent-btn, #b6c92f);
+  color: var(--accent-green, #4d5c1c);
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px 22px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, border-color 0.2s;
+  box-shadow: 0 2px 8px rgba(180, 200, 80, 0.10);
+  margin-top: 8px;
+}
+.start-button:hover,
+button:hover,
+.register-form button:hover,
+.register-btn:hover,
+.login-btn:hover,
+.login-type-btn:hover,
+.login-type-btn.active {
+  background: var(--accent-btn-hover, #fffde4);
+  color: var(--main-green, #b6c92f);
+  border-color: var(--main-green, #b6c92f);
+}
+
+.register-message {
+  color: #d32f2f;
+  margin-top: 14px;
+  font-size: 1rem;
+}
+
+.register-link {
+  margin-top: 22px;
+  color: #20815c;
+  font-size: 1rem;
+}
+
+.register-link a {
+  color: #e87d56;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.register-link a:hover {
+  color: #c95e36;
+}
