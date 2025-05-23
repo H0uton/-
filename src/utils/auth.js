@@ -1,19 +1,37 @@
 // utils/auth.js
 
 export function registerUser(userData) {
-  return fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(userData),
-  }).then(res => res.json());
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const userExists = users.some(
+    user =>
+      user.email === userData.email ||
+      (userData.nickname && user.nickname === userData.nickname)
+  );
+
+  if (userExists) {
+    return { success: false, message: 'Пользователь уже существует' };
+  }
+
+  users.push({
+    email: userData.email,
+    password: userData.password,
+    nickname: userData.nickname || '',
+    avatar: userData.avatar || '' // сохраняем base64 строку, если есть
+  });
+  localStorage.setItem('users', JSON.stringify(users));
+  return { success: true };
 }
 
 export function loginUser(email, password) {
-  return fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
-  }).then(res => res.json());
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const user = users.find(user => user.email === email && user.password === password);
+
+  if (user) {
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    return { success: true, user };
+  }
+
+  return { success: false, message: 'Неверный email или пароль' };
 }
 
 export function logoutUser() {
@@ -26,13 +44,9 @@ export function getCurrentUser() {
 
 // Получить всех пользователей (логины и пароли)
 export function getAllUsers() {
-  return fetch(`${import.meta.env.VITE_API_URL}/api/users`).then(res => res.json());
+  return JSON.parse(localStorage.getItem('users')) || [];
 }
 
-export function isAdmin(user) {
-  // Замените email на свой
-  return user && user.email === 'admin@example.com';
-}
 export function isAdmin(user) {
   // Замените email на свой
   return user && user.email === 'admin@example.com';
