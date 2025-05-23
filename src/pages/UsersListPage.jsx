@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getCurrentUser, isAdmin } from '../utils/auth';
+import { getAllUsers, getCurrentUser, isAdmin } from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
 
 export default function UsersListPage() {
@@ -12,9 +12,7 @@ export default function UsersListPage() {
       navigate('/');
       return;
     }
-    fetch(`${import.meta.env.VITE_API_URL}/api/users`)
-      .then(res => res.json())
-      .then(setUsers);
+    setUsers(getAllUsers());
   }, [currentUser, navigate]);
 
   if (!isAdmin(currentUser)) {

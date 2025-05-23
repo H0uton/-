@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { registerUser } from '../utils/auth';
 import './RegisterPage.css';
 
 function RegisterPage() {
@@ -11,21 +12,13 @@ function RegisterPage() {
   const handleRegister = (e) => {
     e.preventDefault();
     setMsg('');
-    fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: username, password }),
-    })
-      .then(res => res.json())
-      .then(result => {
-        if (result.success) {
-          setMsg('Регистрация успешна!');
-          setTimeout(() => navigate('/login'), 1000);
-        } else {
-          setMsg('Ошибка: ' + (result.error || result.message));
-        }
-      })
-      .catch(() => setMsg('Ошибка соединения с сервером'));
+    const result = registerUser({ email: username, password });
+    if (result.success) {
+      setMsg('Регистрация успешна!');
+      setTimeout(() => navigate('/login'), 1000);
+    } else {
+      setMsg('Ошибка: ' + result.message);
+    }
   };
 
   return (
