@@ -1,24 +1,33 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { registerUser } from '../utils/auth';
 import './RegisterPage.css';
 
 function RegisterPage() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
   const navigate = useNavigate();
 
+  // Функция регистрации через Supabase
+  async function registerUser(email, password) {
+    // supabase должен быть глобально доступен через <script> в index.html
+    const { data, error } = await window.supabase.auth.signUp({
+      email: email,
+      password: password
+    });
+
+    if (error) {
+      setMsg("Ошибка регистрации: " + error.message);
+    } else {
+      setMsg("Проверь почту для подтверждения!");
+      setTimeout(() => navigate('/login'), 2000);
+    }
+  }
+
   const handleRegister = (e) => {
     e.preventDefault();
     setMsg('');
-    const result = registerUser({ email: username, password });
-    if (result.success) {
-      setMsg('Регистрация успешна!');
-      setTimeout(() => navigate('/login'), 1000);
-    } else {
-      setMsg('Ошибка: ' + result.message);
-    }
+    registerUser(email, password);
   };
 
   return (
@@ -26,12 +35,12 @@ function RegisterPage() {
       <h2>Зарегистрируйся!</h2>
       <form className="register-form" onSubmit={handleRegister}>
         <input
-          type="text"
-          placeholder="Логин"
+          type="email"
+          placeholder="Email"
           required
-          value={username}
+          value={email}
           maxLength={100}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           style={{
             padding: '13px 14px',
             border: '1.5px solid #cbe7b6',
